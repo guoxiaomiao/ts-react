@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"; 
 
-const useMousePosition = ()=>{
+const useMousePosition = () =>{
     const [positions, setPositions] = useState({x:0, y:0})
     useEffect(()=>{
         const updateMouse = (e: MouseEvent)=>{
@@ -11,6 +11,6 @@ const useMousePosition = ()=>{
             document.removeEventListener('mousemove',updateMouse)
         }
     },[])
-    return <p>x:{positions.x}, y:{positions.y}</p>
+    return positions
 }
 export default useMousePosition

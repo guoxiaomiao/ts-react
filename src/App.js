@@ -7,14 +7,12 @@ import MouseTracker from "./components/MouseTracker";
 import useMousePosition from "./hooks/useMousePosition";
 
 function App() {
-    const 
+    const positions = useMousePosition()
     return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>x:{positions.x}, y:{positions.y}</p>
         <LikeButton/>
         <MouseTracker/>
         <a
