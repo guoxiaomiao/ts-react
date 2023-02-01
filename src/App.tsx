@@ -1,13 +1,22 @@
 // @ts-nocheck
 import logo from './logo.svg';
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import LikeButton from "./components/LikeButton";
 import MouseTracker from "./components/MouseTracker";
 import useMousePosition from "./hooks/useMousePosition";
+import useUrlLoader from "./hooks/useUrlLoader";
+
+interface IShowResult {
+    message: String;
+    status: String;
+}
 
 function App() {
     const positions = useMousePosition()
+    const [show, setShow] = useState(true)
+    const [data, loading] = useUrlLoader('https://dog.ceo/api/breeds/image/random', [show])
+    const dogResult = data as IShowResult
     return (
     <div className="App">
       <header className="App-header">
@@ -15,14 +24,8 @@ function App() {
         <p>x:{positions.x}, y:{positions.y}</p>
         <LikeButton/>
         <MouseTracker/>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={()=>setShow(!show)}>refresh dog photo</button>
+        {loading ? <p>🐕读取中</p>:<img src={dogResult && dogResult.message}/>}
       </header>
     </div>
   );
